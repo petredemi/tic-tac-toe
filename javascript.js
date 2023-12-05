@@ -1,124 +1,115 @@
-document.getElementById('demo').innerHTML = 'hello world';
-console.log('hello world');
 
-//line1[0] = 'a';
-//line1.push('asa');
-//console.log(line1);
-//console.log(line2[1]);
-//const line1 = ['a', 'b', 'c'];
-//const line2 = ['d', 'e', 'f'];
-//const line3 = ['g', 'h', 'i'];
+
+const buttons = Array.from(document.querySelectorAll('.board > button'));
 const board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
-//let [a, b, c, d, e, f, g, h, i] = board; 
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-const include = function chose(x){
-    return numbers.includes(x);
+
+let [a, b, c, d, e, f, g, h, i] = board; 
+let include = function chose(x){
+    return board.includes(x);
 }
-//let x;
-let a = board[0];
-let b = board[1];
-let c = board[2];
-let d = board[3];
-let e = board[4];
-let f = board[5];
-let g = board[6];
-let h = board[7];
-let i = board[8];
 
 function winner(){
+    let player1 = 'you are the winner';
+    let player2 = 'computer is the winner'; 
+    let equal = 'it is a draw';
     if (a == b && b == c){
         if( a == 'x'){
-        return 'winner is Player1';
+        return player1;
         }else{
-            return 'winner is player2';
+            return player2;
         }
     }else if(d == e && e == f){
         if( d == 'x'){
-            return'winner is Player1';
+            return player1;
             }else{
-            return 'winner is player2';
+            return player2;
             }
     }else if(g == h && h == i){
         if( g == 'x'){
-            return 'winner is Player1';
+            return player1;
             }else{
-            return 'winner is player2';
+            return player2;
+            }
+    
+    }else if(a == d && d == g){
+        if( a == 'x'){
+            return player1;
+            }else{
+            return player2;
+            }
+    }else if(b == e && e == h){
+        if( b == 'x'){
+            return player1;
+            }else{
+            return player2;
+            }
+
+    }else if( c == f && f == i){
+        if( c == 'x'){
+            return player1;
+            }else{
+            return player2;
             }
     }else if( a == e && e == i){
         if( a == 'x'){
-            return 'winner is Player1';
+            return player1;
         }else {
-            return 'winner is player2';
+            return player2;
             }
-    }else if(g == e && e == c){
-        if( a == 'x'){
-            return 'winner is Player1';
+    }else if( c == e && e == g){
+        if( c == 'x'){
+            return player1;
             }else{
-            console.log('winner is player2');
+            return player2;
             }
-    }else{ 
-        return 'play further'; 
-    }
+    }//else { 
+       //return equal; 
+    //}
 }
+
 function player1(x){
-    if (include(x) === false){ return;}
-    board[x]= 'x';
-  /*  a = board[0];
-    b = board[1];
-    c = board[2];
-    d = board[3];
-    e = board[4];
-    f = board[5];
-    g = board[6];
-    h = board[7];
-    i = board[8];*/
-    numbers.splice(x, 1);
-
+    console.log(x);
     console.log(include(x));
-    console.log(winner());
+    console.log(typeof x);
+//    if( board[x] == 'x' || board[x] == 'o'){return;}
+   // else{
+    board[x]= 'x';
+    console.log(include(x));
+    [a, b, c, d, e, f, g, h, i] = board; 
     document.getElementById(`item${x}`).textContent = 'x';
-
+   // }
 };
 function playercomputer(){
-    y = Math.floor(Math.random() * numbers.length);
+    let ii = 0;
+  //  let z ;
+    do{
+        z = Math.floor(Math.random() * board.length);
+        ii++;
+    } 
+    while ( board[z] == 'x' || board[z] == 'o' && ii < 9);
+
+    let y = z.toString();
+    console.log(y);
     if ( include(y) == false){ return;}
     board[y] = 'o';
-    document.getElementById(`item${y}`).innerHTML = 'y';
-    numbers.splice(y, 1);
-    console.log(numbers.length);
     console.log(y);
-    console.log(numbers)
-
+    [a, b, c, d, e, f, g, h, i] = board;
+    function delay(){
+        document.getElementById(`item${y}`).innerHTML = 'o';
+    }    
+    setTimeout(delay, 500);
 }
+buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+        if (winner() != undefined) return;   
+        let x = button.value;
+        if ( board[x]  == 'x' || board[x]== 'o') return;
+        console.log(x);
+        player1(x);
+        playercomputer();
+     //   console.log(board);
+     //   console.log(winner());
+        document.getElementById('winner').textContent = winner();
+    });
+});
 
-function player2(y){
-    board[y]= 'o';
-    a = board[0];
-    b = board[1];
-    c = board[2];
-    d = board[3];
-    e = board[4];
-    f = board[5];
-    g = board[6];
-    h = board[7];
-    i = board[8];
-    console.log(winner());
-  //  b = 'x';
-  //  c = 'x';
-};
-
-//playercomputer();
-
-player1(8);
-playercomputer();
-//player1(2);
-//player1(0);
-//player1(0);
-//player1(1);
-//player2(4);
-//player2(5);
-
-//console.log(winner());
-console.log(board);
-//console.log(numbers);
-//console.log(include(2));

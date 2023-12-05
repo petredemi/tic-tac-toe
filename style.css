@@ -1,0 +1,46 @@
+
+body{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    display: flex;
+    margin-top: 40px;
+    height: auto;
+    width: fit-content;
+    font-size: 8vh;
+    color: rgb(255, 8, 8);
+    text-shadow: 2px 2px 1px black;
+    flex: 2 1 auto;
+}
+.board{
+    display: grid;
+    border: 1px solid red;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    gap: 5px;
+    width: fit-content;
+}
+.item{
+    border: 1px solid black;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 10vh;
+}
+.item:hover{
+    background-color: rgb(244, 235, 156);
+}
+#winner{
+    font-size: 5vh;
+    margin: 20px;
+    color: darkcyan;
+}
+#winner::first-letter{
+    color: red;
+    font-size: 10vh;
+    font-weight: 800;
+}
