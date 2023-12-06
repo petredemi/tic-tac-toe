@@ -1,7 +1,9 @@
 
 
 const buttons = Array.from(document.querySelectorAll('.board > button'));
-const board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
+let board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
+const restart = document.querySelector('#restart');
+const item = document.querySelectorAll('.item');
 
 let [a, b, c, d, e, f, g, h, i] = board; 
 let include = function chose(x){
@@ -66,7 +68,6 @@ function winner(){
        //return equal; 
     //}
 }
-
 function player1(x){
     console.log(x);
     console.log(include(x));
@@ -81,18 +82,18 @@ function player1(x){
 };
 function playercomputer(){
     let ii = 0;
-  //  let z ;
+    let z ;
     do{
         z = Math.floor(Math.random() * board.length);
         ii++;
     } 
     while ( board[z] == 'x' || board[z] == 'o' && ii < 9);
-
+   // if(board[0] == 'x' && board[1] == 'x'){
+     //  z = 2;
+   // }
     let y = z.toString();
-    console.log(y);
     if ( include(y) == false){ return;}
     board[y] = 'o';
-    console.log(y);
     [a, b, c, d, e, f, g, h, i] = board;
     function delay(){
         document.getElementById(`item${y}`).innerHTML = 'o';
@@ -107,9 +108,14 @@ buttons.forEach((button) => {
         console.log(x);
         player1(x);
         playercomputer();
-     //   console.log(board);
-     //   console.log(winner());
         document.getElementById('winner').textContent = winner();
     });
 });
-
+buttons.forEach((button) =>{
+    restart.addEventListener('click', (e) => {
+        board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
+        [a, b, c, d, e, f, g, h, i] = board;
+        document.getElementById('winner').textContent = '';
+        button.textContent = '';
+    });
+});
