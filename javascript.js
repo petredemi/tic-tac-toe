@@ -92,6 +92,7 @@ function playercomputer(){
     }    
     setTimeout(delay, 600);
 }
+
 buttons.forEach((button) => {
         button.addEventListener('click', () => {
         if (winner() != undefined) return;   
@@ -99,10 +100,18 @@ buttons.forEach((button) => {
         if ( board[x]  == 'x' || board[x]== 'o') return;
         equal = equal + 1;
         player1(x);
-        playercomputer();
-        document.getElementById('winner').textContent = winner();
+        playercomputer(); 
+        function delay(){
+            document.getElementById('winner').textContent = winner();
+        }    
+    
+        setTimeout(delay, 2000);
+    
        if( equal == 5 && winner() == undefined){
+        function delay(){
             document.getElementById('winner').textContent = 'It is a draw';
+        }      
+        setTimeout(delay, 3000);
         }
     });
 });
