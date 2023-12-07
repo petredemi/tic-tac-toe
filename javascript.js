@@ -3,7 +3,7 @@
 const buttons = Array.from(document.querySelectorAll('.board > button'));
 let board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
 const restart = document.querySelector('#restart');
-const item = document.querySelectorAll('.item');
+let equal = 0; // counts no rounds
 
 let [a, b, c, d, e, f, g, h, i] = board; 
 let include = function chose(x){
@@ -12,8 +12,7 @@ let include = function chose(x){
 
 function winner(){
     let player1 = 'you are the winner';
-    let player2 = 'computer is the winner'; 
-    let equal = 'it is a draw';
+    let player2 = 'computer is the winner';
     if (a == b && b == c){
         if( a == 'x'){
         return player1;
@@ -64,21 +63,17 @@ function winner(){
             }else{
             return player2;
             }
-    }//else { 
-       //return equal; 
-    //}
+    }
 }
+
 function player1(x){
-    console.log(x);
-    console.log(include(x));
-    console.log(typeof x);
-//    if( board[x] == 'x' || board[x] == 'o'){return;}
-   // else{
+    if( board[x] == 'x' || board[x] == 'o'){return;}
+    else{
     board[x]= 'x';
     console.log(include(x));
     [a, b, c, d, e, f, g, h, i] = board; 
     document.getElementById(`item${x}`).textContent = 'x';
-   // }
+    }
 };
 function playercomputer(){
     let ii = 0;
@@ -88,9 +83,6 @@ function playercomputer(){
         ii++;
     } 
     while ( board[z] == 'x' || board[z] == 'o' && ii < 9);
-   // if(board[0] == 'x' && board[1] == 'x'){
-     //  z = 2;
-   // }
     let y = z.toString();
     if ( include(y) == false){ return;}
     board[y] = 'o';
@@ -98,24 +90,28 @@ function playercomputer(){
     function delay(){
         document.getElementById(`item${y}`).innerHTML = 'o';
     }    
-    setTimeout(delay, 500);
+    setTimeout(delay, 600);
 }
 buttons.forEach((button) => {
         button.addEventListener('click', () => {
         if (winner() != undefined) return;   
         let x = button.value;
         if ( board[x]  == 'x' || board[x]== 'o') return;
-        console.log(x);
+        equal = equal + 1;
         player1(x);
         playercomputer();
         document.getElementById('winner').textContent = winner();
+       if( equal == 5 && winner() == undefined){
+            document.getElementById('winner').textContent = 'It is a draw';
+        }
     });
 });
-buttons.forEach((button) =>{
+buttons.forEach((button) =>{ //reset game
     restart.addEventListener('click', (e) => {
         board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
         [a, b, c, d, e, f, g, h, i] = board;
         document.getElementById('winner').textContent = '';
         button.textContent = '';
+        equal = 0;
     });
 });
