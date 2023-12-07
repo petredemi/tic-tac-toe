@@ -9,6 +9,9 @@ let [a, b, c, d, e, f, g, h, i] = board;
 let include = function chose(x){
     return board.includes(x);
 }
+// board display   [a, b, c]
+//                 [d, e ,f]
+ //                [g, h, i]
 
 function winner(){
     let player1 = 'you are the winner';
@@ -105,13 +108,13 @@ buttons.forEach((button) => {
             document.getElementById('winner').textContent = winner();
         }    
     
-        setTimeout(delay, 2000);
+        setTimeout(delay, 1000);
     
        if( equal == 5 && winner() == undefined){
         function delay(){
             document.getElementById('winner').textContent = 'It is a draw';
         }      
-        setTimeout(delay, 3000);
+        setTimeout(delay, 1000);
         }
     });
 });
