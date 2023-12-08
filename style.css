@@ -25,6 +25,7 @@ h1{
 }
 .item{
     border: 1px solid black;
+    background: white;
     display: flex;
     text-align: center;
     align-items: center;
@@ -47,6 +48,7 @@ h1{
 #restart{
     margin-top: 10px;
     margin-bottom: 20px;
+    background: wheat;
     font-size: 1.4rem;
     height: 2rem;
     width: 8rem;
