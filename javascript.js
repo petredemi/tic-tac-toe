@@ -93,7 +93,7 @@ function playercomputer(){
     function delay(){
         document.getElementById(`item${y}`).innerHTML = 'o';
     }    
-    setTimeout(delay, 600);
+    setTimeout(delay, 500);
 }
 
 buttons.forEach((button) => {
@@ -103,12 +103,18 @@ buttons.forEach((button) => {
         if ( board[x]  == 'x' || board[x]== 'o') return;
         equal = equal + 1;
         player1(x);
-        playercomputer(); 
+        if (winner() != undefined)
+        { 
         function delay(){
             document.getElementById('winner').textContent = winner();
         }    
-    
         setTimeout(delay, 1000);
+        return;
+        }
+        playercomputer();
+        document.getElementById('winner').textContent = winner();
+
+
     
        if( equal == 5 && winner() == undefined){
         function delay(){
